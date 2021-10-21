@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_test/main.dart';
+import 'package:pokemon_test/router.dart';
 import 'package:pokemon_test/src/pages/home_page.dart';
 import 'package:pokemon_test/src/pages/login_page.dart';
 
@@ -8,11 +10,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
+      routes: map,
+      initialRoute: initRoute,
+
     );
   }
 }
