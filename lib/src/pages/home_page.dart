@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_test/src/config/config.dart' as my_theme;
+import 'package:pokemon_test/src/service/user_model.dart';
 
 class HomePage extends StatefulWidget {
   // const HomePage({Key? key, required this.title}) : super(key: key);
@@ -13,12 +15,57 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+ String _name = '';
+ String _email = '';
+  @override
+  void initState() {
+    user_get();
+  }
+    Future<Null> user_get() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp().then((value) async {
+        await FirebaseAuth.instance.authStateChanges().listen((event) async {
+          if (event != null) {
+            //Login
+            String uid = event.uid;
+            await FirebaseFirestore.instance
+                .collection('user')
+                .doc(uid)
+                .snapshots()
+                .listen((event) {
+
+              UserModel model = UserModel.fromMap(event.data()!);
+
+              setState(() {
+                _name = model.name;
+                _email = model.email;
+              });
+
+            });
+          } else {
+            //Logout
+
+          }
+        });
+      });
+    }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.black,
+        flexibleSpace: Container(decoration: BoxDecoration(gradient: my_theme.Theme.gradientColors),),
+
         leading: Text('image'),
-        title: Text('ชื่อนามสกุล'),
+        title: Column(
+          children: [
+            Text(_name,style: TextStyle(fontSize: 18),),
+            Text(_email,style: TextStyle(fontSize: 18),),
+          ],
+        ),
         actions: [
        IconButton(onPressed: () async{
         await Firebase.initializeApp().then((value) async{

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "713247822913-47vfrpfmi9voib3bj04qnsaa7nus11kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Peachvon.pokemon_test",
+            "certificate_hash": "6758a3769dfabb3f5e3841e27b33bbf71b8ee91c"
+          }
+        },
+        {
           "client_id": "713247822913-ktraf2u1367icugr2k11avbtha8h82gc.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "713247822913-ktraf2u1367icugr2k11avbtha8h82gc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "713247822913-m875ppq0u3es0eedrsg4eegg4cqm00n5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Peachvon.pokemonTest"
+              }
             }
           ]
         }

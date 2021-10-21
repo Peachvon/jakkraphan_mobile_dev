@@ -22,4 +22,17 @@ class Theme {
     end: Alignment.bottomCenter,
     stops: [0.0, 1.0],
   );
+
+  static const gradientColors1 = const LinearGradient(
+    colors: [activeColor1, activeColor2],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    stops: [0.0, 1.0],
+  );
+  static const gradientColors2 = const LinearGradient(
+    colors: [activeColor1, activeColor2],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    stops: [0.0, 0.5],
+  );
 }

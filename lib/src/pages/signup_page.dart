@@ -45,6 +45,11 @@ class _Signup_page extends State<Signup_page> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            foregroundColor: Colors.black,
+            flexibleSpace: Container(
+              decoration:
+                  BoxDecoration(gradient: my_theme.Theme.gradientColors),
+            ),
             title: Text(
               'สมัครสมาชิก',
               style: TextStyle(
@@ -368,7 +373,7 @@ class _Signup_page extends State<Signup_page> {
           });
         } on FirebaseAuthException catch (e) {
 
-          print(e.message);
+          print('Error: ${e.message}');
         }
       }
     });

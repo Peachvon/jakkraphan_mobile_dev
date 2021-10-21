@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pokemon_test/src/config/config.dart' as my_theme;
 import 'package:pokemon_test/src/pages/signup_page.dart';
 import 'package:pokemon_test/router.dart';
@@ -186,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
       width: MediaQuery.of(context).size.width * 0.85,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Gmail '),
+        onPressed: () => login_google(),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -229,4 +231,28 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  Future<Null> login_google()async{
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
+await Firebase.initializeApp().then((value)  async{
+  await _googleSignIn.signIn().then((value){
+
+    String? name = value!.displayName;
+    String email = value.email;
+    print('Google login => name: $name , email: $email');
+    // Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+    //   print('Yes!');
+
+
+    });
+
+});
+
+
+}
 }
