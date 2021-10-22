@@ -6,8 +6,19 @@ class Details extends StatelessWidget {
 
   late final String name;
   late final String image;
+  late final String id;
+  late final String height;
+  late final String weight;
+  late final String baseExperience;
+  late final String abilities;
 
-  Details({required this.name, required this.image
+  Details({required this.name,
+    required this.image,
+    required this.id,
+    required this.height,
+    required this.weight,
+    required this.baseExperience,
+    required this.abilities,
   });
 
 
@@ -61,9 +72,9 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                              width: MediaQuery.of(context).size.width * 0.45,
-                              child: Text('HP'),
+                              child: Text('ID'),
                          ),
-                          Text(': $name'),
+                          Text(': No. $id'),
                         ],
                       ),
 
@@ -74,9 +85,9 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                             width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Attack'),
+                            child: Text('height'),
                           ),
-                          Text(': $name'),
+                          Text(': $height cm'),
                         ],
                       ),
                       Row(
@@ -86,9 +97,9 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                             width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Defense'),
+                            child: Text('weight'),
                           ),
-                          Text(': $name'),
+                          Text(': $weight cm'),
                         ],
                       ),
                       Row(
@@ -98,35 +109,13 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                             width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Speed'),
+                            child: Text('Lv.'),
                           ),
-                          Text(': $name'),
+                          Text(': $baseExperience'),
                         ],
                       ),
-                      Row(
 
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Special Attack'),
-                          ),
-                          Text(': $name'),
-                        ],
-                      ),
-                      Row(
 
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Special Defense',),
-                          ),
-                          Text(': $name'),
-                        ],
-                      ),
                     ],
                   ),),
                   Column(

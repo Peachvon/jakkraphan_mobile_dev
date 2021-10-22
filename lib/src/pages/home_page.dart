@@ -52,12 +52,25 @@ class _HomePageState extends State<HomePage> {
 //Sprites
     var   sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
     var   sprites_name_Draf = _pokemonDataDetails!.name;
-    var   sprites_name_Drafd = _pokemonDataDetails!.name;
-    print('============>$sprites_name_Drafd');
+    var   sprites_weight_Draf = _pokemonDataDetails!.weight;
+    var   sprites_height_Draf = _pokemonDataDetails!.height;
+    var   sprites_id_Draf = _pokemonDataDetails!.id;
+    var   sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
+    var   sprites_abilities_Draf = _pokemonDataDetails!.abilities.map((e) => e.ability.name);
+    print('============>$sprites_weight_Draf');
+    print('============>$sprites_height_Draf');
+    print('============>$sprites_id_Draf');
+    print('============>$sprites_baseExperience_Draf');
+    print('============>$sprites_abilities_Draf');
     print('xxxxxxxxxxxxxx ${sprites_name_Draf}');
     Navigator.push(context, MaterialPageRoute(builder: (context)=> Details(
       name: sprites_name_Draf,
-      image:sprites_image_Draf,
+      image: sprites_image_Draf,
+      id: sprites_id_Draf.toString(),
+      height: sprites_height_Draf.toString(),
+      weight: sprites_weight_Draf.toString(),
+      baseExperience: sprites_baseExperience_Draf.toString(),
+      abilities: sprites_abilities_Draf.toString(),
     )));
 
   }
