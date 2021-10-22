@@ -32,74 +32,66 @@ class _HomePageState extends State<HomePage> {
   pokemonData? _pokemonDataApi;
   pokomonDetails? _pokemonDataDetails;
 
-
   @override
   void initState() {
     user_get();
-    getPokemon();
+    //getPokemon();
   }
 
-
-
   Future<pokomonDetails?> NavigatorPokemonDetails(String u) async {
-    var response = await http
-        .get(Uri.parse(u));
+    var response = await http.get(Uri.parse(u));
     _pokemonDataDetails = pokomonDetailsFromJson(response.body);
     // print('xxxxxsx$_pokemonDataDetails');
-     print(response.body);
+    print(response.body);
 
     //_pokeResult = pokemonData.fromJson(_pokemonDataDetails);
 //Sprites
-    var   sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
-    var   sprites_name_Draf = _pokemonDataDetails!.name;
-    var   sprites_weight_Draf = _pokemonDataDetails!.weight;
-    var   sprites_height_Draf = _pokemonDataDetails!.height;
-    var   sprites_id_Draf = _pokemonDataDetails!.id;
-    var   sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
-    var   sprites_abilities_Draf = _pokemonDataDetails!.abilities.map((e) => e.ability.name);
-    print('============>$sprites_weight_Draf');
-    print('============>$sprites_height_Draf');
-    print('============>$sprites_id_Draf');
-    print('============>$sprites_baseExperience_Draf');
-    print('============>$sprites_abilities_Draf');
-    print('xxxxxxxxxxxxxx ${sprites_name_Draf}');
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> Details(
-      name: sprites_name_Draf,
-      image: sprites_image_Draf,
-      id: sprites_id_Draf.toString(),
-      height: sprites_height_Draf.toString(),
-      weight: sprites_weight_Draf.toString(),
-      baseExperience: sprites_baseExperience_Draf.toString(),
-      abilities: sprites_abilities_Draf.toString(),
-    )));
-
+    var sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
+    var sprites_name_Draf = _pokemonDataDetails!.name;
+    var sprites_weight_Draf = _pokemonDataDetails!.weight;
+    var sprites_height_Draf = _pokemonDataDetails!.height;
+    var sprites_id_Draf = _pokemonDataDetails!.id;
+    var sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
+    var sprites_abilities_Draf =
+        _pokemonDataDetails!.abilities.map((e) => e.ability.name);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Details(
+                  name: sprites_name_Draf,
+                  image: sprites_image_Draf,
+                  id: sprites_id_Draf.toString(),
+                  height: sprites_height_Draf.toString(),
+                  weight: sprites_weight_Draf.toString(),
+                  baseExperience: sprites_baseExperience_Draf.toString(),
+                  abilities: sprites_abilities_Draf.toString(),
+                )));
   }
 
-
-
-
-  Future<pokomonDetails?> getPokamonDetalis(String u) async {
-    var response = await http
-        .get(Uri.parse(u));
+  Future<pokomonDetails?> getPokamonDetails(String u) async {
+    var response = await http.get(Uri.parse(u));
     _pokemonDataDetails = pokomonDetailsFromJson(response.body);
     // print('xxxxxsx$_pokemonDataDetails');
     //print(response.body);
 
     //_pokeResult = pokemonData.fromJson(_pokemonDataDetails);
 //Sprites
-    var   sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
-    var   sprites_name_Draf = _pokemonDataDetails!.name;
-   // print('xxxxxxxxxxxxxx ${sprites_name_Draf}');
+    var sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
+    var sprites_name_Draf = _pokemonDataDetails!.name;
+    // print('xxxxxxxxxxxxxx ${sprites_name_Draf}');
     return _pokemonDataDetails;
-
   }
-List ff = [];
-   custom_json(List name,List url) {
+
+
+  custom_json(List name, List url) {
     print(name[0]);
     print(url[0]);
-    var xsd = [{'name':name[0],'url':url[0]},{'name':name[1],'url':url[1]},{'name':name[2],'url':url[2]}];
-    ff = xsd;
-   // Future<pokomonDetails?> sd = getPokamonDetalis(url[0]);
+    var xsd = [
+      {'name': name[0], 'url': url[0]},
+      {'name': name[1], 'url': url[1]},
+      {'name': name[2], 'url': url[2]}
+    ];
+
     print(xsd.map((e) => null));
     var jsonText = jsonEncode(xsd);
     print(jsonText.runtimeType);
@@ -108,24 +100,34 @@ List ff = [];
     // for(int i = 1 ; i <= name.length;i++){
     //   print(name[0]);
     // }
-
   }
-
+  List<Map> Menu = [];
+  List<Map> hh = [{"name":"k","url":"hj","image":"gh"},{"name":"k","url":"hj","image":"gh"}];
   Future<pokemonData?> getPokemon() async {
     var response = await http
         .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10'));
     print(response.body);
     _pokemonDataApi = pokemonFromJson(response.body);
-    var   results_name_Draf = _pokemonDataApi!.results.map((e) => e.name);
-    var  results_url_Draf = _pokemonDataApi!.results.map((e) => e.url);
+    var results_name_Draf = _pokemonDataApi!.results.map((e) => e.name);
+    var results_url_Draf = _pokemonDataApi!.results.map((e) => e.url);
+    List <Result> cc = _pokemonDataApi!.results;
     results_name = results_name_Draf.toList();
     results_url = results_url_Draf.toList();
-     //custom_json(results_name,results_url);
-    var response1 = await http
-        .get(Uri.parse(results_url[0]));
-    _pokemonDataDetails = pokomonDetailsFromJson(response1.body);
-     print(_pokemonDataDetails!.name);
+    Menu = [];
+    for(int i = 0 ; i <= 9; i++){
+      // var response1 = await http.get(Uri.parse(results_url[i]));
+      // _pokemonDataDetails = pokomonDetailsFromJson(response1.body);
+      Map x = {'name':results_name[i],'url':results_url[i]};
+      Menu.add(x);
 
+    }
+   // Map x = {'name':'qq','url':'qwe'};
+
+
+    print('===========> ${Menu.length}');
+    //custom_json(results_name,results_url);
+
+    //print(_pokemonDataDetails!.sprites.frontDefault);
   }
 
   Future<Null> user_get() async {
@@ -168,9 +170,8 @@ List ff = [];
             width: 100.0,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png')
-                )
-            ),
+                    image: NetworkImage(
+                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'))),
           ),
           title: Column(
             children: [
@@ -208,51 +209,84 @@ List ff = [];
               ),
             ),
             FutureBuilder(
-              future: getPokemon(),
-              builder: (BuildContext context, AsyncSnapshot<pokemonData?> snapshot){
-                if(snapshot.connectionState == ConnectionState.done){
-                  return view();
-                }
-                else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              }
-
-            ),
+                future: getPokemon(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<pokemonData?> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return view1();
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                }),
           ],
         ));
   }
 
-  view (){
+  view() {
     return GridView.count(
       crossAxisCount: 2,
       children: _pokemonDataApi!.results.map((poke_results) {
         return Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: InkWell(
-          onTap: (){NavigatorPokemonDetails(poke_results.url);
-
-          },
-          child: Card(
-            child: Column(
-              children: <Widget>[
-                Container(
-
-                  height: 140.0,
-                  width: 100.0,
-                  decoration: BoxDecoration(
-                    image:  DecorationImage(
-                        image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png')
+          padding: const EdgeInsets.all(2.0),
+          child: InkWell(
+            onTap: () {
+              NavigatorPokemonDetails(poke_results.url);
+            },
+            child: Card(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 140.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png')),
                     ),
                   ),
-                ),
-                Text(poke_results.name,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
-              ],
+                  Text(
+                    poke_results.name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      );
+        );
       }).toList(),
+    );
+  }
+  view1() {
+    return GridView.count(
+      crossAxisCount: 2,
+      children: List.generate(Menu.length, (index) {
+        return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: InkWell(
+            onTap: () {
+              NavigatorPokemonDetails(Menu[index]['url']);
+            },
+            child: Card(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 140.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png')),
+                    ),
+                  ),
+                  Text(
+                    Menu[index]['name'],
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

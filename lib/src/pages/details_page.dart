@@ -114,6 +114,30 @@ class Details extends StatelessWidget {
                           Text(': $baseExperience'),
                         ],
                       ),
+                      Row(
+
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(bottom: 10),
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Text('Lv.'),
+                          ),
+                          Text(': $baseExperience'),
+                        ],
+                      ),
+                      Row(
+
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(bottom: 10),
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Text('Lv.'),
+                          ),
+                          Text(': $baseExperience'),
+                        ],
+                      ),
 
 
                     ],
