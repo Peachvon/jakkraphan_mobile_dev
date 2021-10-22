@@ -52,6 +52,8 @@ class _HomePageState extends State<HomePage> {
 //Sprites
     var   sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
     var   sprites_name_Draf = _pokemonDataDetails!.name;
+    var   sprites_name_Drafd = _pokemonDataDetails!.name;
+    print('============>$sprites_name_Drafd');
     print('xxxxxxxxxxxxxx ${sprites_name_Draf}');
     Navigator.push(context, MaterialPageRoute(builder: (context)=> Details(
       name: sprites_name_Draf,

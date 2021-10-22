@@ -49,7 +49,7 @@ class Details extends StatelessWidget {
                   ),
                   Text(name,style: TextStyle(fontWeight:FontWeight.bold,fontSize: 20),),
                   SizedBox(height: 50.0,),
-                  Container(width: MediaQuery.of(context).size.width * 0.80,
+                  Container(width: MediaQuery.of(context).size.width * 0.72,
                     padding: EdgeInsets.only(top: 10),
 
                     child: Column(
@@ -122,14 +122,37 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                             width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Special Defense'),
+                            child: Text('Special Defense',),
                           ),
                           Text(': $name'),
                         ],
                       ),
                     ],
                   ),),
-                  Container(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+
+                        padding: EdgeInsets.only(top: 20,bottom: 20),
+                        width: MediaQuery.of(context).size.width * 0.72,
+
+                            child: Text('ข้อมูล',style:TextStyle(fontSize: 18,fontWeight: FontWeight.bold) ,),
+
+
+                      ),
+                      Container(
+
+                        padding: EdgeInsets.only(bottom: 10),
+                        width: MediaQuery.of(context).size.width * 0.72,
+
+                        child: Text('xxxxxxxxxxxxxxxxx'),
+
+
+                      )
+
+                    ],
+                  ),
                 ],
             ),
              ),

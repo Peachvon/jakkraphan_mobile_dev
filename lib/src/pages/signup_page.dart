@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_test/src/config/config.dart' as my_theme;
 import 'package:pokemon_test/src/service/user_model.dart';
 import 'package:pokemon_test/router.dart';
-import 'package:pokemon_test/src/utils/RegexValidator.dart';
 
 class Signup_page extends StatefulWidget {
   @override
