@@ -16,19 +16,28 @@ class Signup_page extends StatefulWidget {
 class _Signup_page extends State<Signup_page> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late TextEditingController confirm_passwordController;
   late TextEditingController nameController;
   late String _err;
-  var _check_color = my_theme.Theme.check_false_color;
-  var _check_icon = my_theme.Theme.check_false_icon;
-  var _check1 = false;
-  bool check2 = false;
-  bool check3 = false;
-  bool check4 = false;
+  var _check_color1 = my_theme.Theme.check_false_color;
+  var _check_color2 = my_theme.Theme.check_false_color;
+  var _check_color3 = my_theme.Theme.check_false_color;
+  var _check_color4 = my_theme.Theme.check_false_color;
+  var _check_icon1 = my_theme.Theme.check_false_icon;
+  var _check_icon2 = my_theme.Theme.check_false_icon;
+  var _check_icon3 = my_theme.Theme.check_false_icon;
+  var _check_icon4 = my_theme.Theme.check_false_icon;
+  bool _check1 = false;
+  bool _check2 = false;
+  bool _check3 = false;
+  bool _check4 = false;
+  bool _check_All = false;
 
   @override
   void initState() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    confirm_passwordController = TextEditingController();
     nameController = TextEditingController();
     super.initState();
   }
@@ -114,9 +123,9 @@ class _Signup_page extends State<Signup_page> {
           Row(
             children: [
               Icon(
-                _check_icon,
+                _check_icon1,
                 size: 18,
-                color: _check_color,
+                color: _check_color1,
               ),
               SizedBox(
                 width: 8.0,
@@ -126,7 +135,7 @@ class _Signup_page extends State<Signup_page> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
-                  color: _check_color,
+                  color: _check_color1,
                 ),
               ),
             ],
@@ -134,8 +143,9 @@ class _Signup_page extends State<Signup_page> {
           Row(
             children: [
               Icon(
-                Icons.check_circle_outline,
+                _check_icon2,
                 size: 18,
+                  color: _check_color2,
               ),
               SizedBox(
                 width: 8.0,
@@ -145,6 +155,7 @@ class _Signup_page extends State<Signup_page> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
+                  color: _check_color2,
                 ),
               ),
             ],
@@ -152,8 +163,9 @@ class _Signup_page extends State<Signup_page> {
           Row(
             children: [
               Icon(
-                Icons.check_circle_outline,
+                _check_icon3,
                 size: 18,
+                color: _check_color3,
               ),
               SizedBox(
                 width: 8.0,
@@ -163,6 +175,7 @@ class _Signup_page extends State<Signup_page> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
+                  color: _check_color3,
                 ),
               ),
             ],
@@ -170,8 +183,9 @@ class _Signup_page extends State<Signup_page> {
           Row(
             children: [
               Icon(
-                Icons.check_circle_outline,
+                _check_icon4,
                 size: 18,
+                color: _check_color4,
               ),
               SizedBox(
                 width: 8.0,
@@ -181,6 +195,7 @@ class _Signup_page extends State<Signup_page> {
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
+                  color: _check_color4,
                 ),
               ),
             ],
@@ -246,6 +261,8 @@ class _Signup_page extends State<Signup_page> {
     );
   }
 
+
+
   signup_password() {
     return Container(
       width: MediaQuery
@@ -262,20 +279,72 @@ class _Signup_page extends State<Signup_page> {
         controller: passwordController,
         onChanged: (passwordController) {
           String password = passwordController;
+          String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+
+          String  pattern2= r'^(?=.*?[A-Z]).';
+          String  pattern3 = r'^(?=.*?[a-z]).';
+          String  pattern4 = r'^(?=.*?[0-9]).';
+          RegExp regExp2 = new RegExp(pattern2);
+          RegExp regExp3 = new RegExp(pattern3);
+          RegExp regExp4 = new RegExp(pattern4);
+
+
           if (password.length < 8) {
-            _check_icon = my_theme.Theme.check_false_icon;
-            _check_color = my_theme.Theme.check_false_color;
+            _check_icon1 = my_theme.Theme.check_false_icon;
+            _check_color1 = my_theme.Theme.check_false_color;
             _check1 = false;
           } else {
-            _check_icon = my_theme.Theme.check_true_icon;
-            _check_color = my_theme.Theme.check_true_color;
+            _check_icon1= my_theme.Theme.check_true_icon;
+            _check_color1 = my_theme.Theme.check_true_color;
             _check1 = true;
           }
+
+          if(regExp2.hasMatch(password) == false){
+            _check_icon2= my_theme.Theme.check_false_icon;
+            _check_color2 = my_theme.Theme.check_false_color;
+            _check2 = false;
+          }else {
+            _check_icon2 = my_theme.Theme.check_true_icon;
+            _check_color2 = my_theme.Theme.check_true_color;
+            _check2 = true;
+          }
+          if(regExp3.hasMatch(password) == false){
+            _check_icon3= my_theme.Theme.check_false_icon;
+            _check_color3 = my_theme.Theme.check_false_color;
+            _check3 = false;
+          }else {
+            _check_icon3 = my_theme.Theme.check_true_icon;
+            _check_color3 = my_theme.Theme.check_true_color;
+            _check3 = true;
+          }
+          if(regExp4.hasMatch(password) == false){
+            _check_icon4= my_theme.Theme.check_false_icon;
+            _check_color4 = my_theme.Theme.check_false_color;
+            _check4 = false;
+          }else {
+            _check_icon4 = my_theme.Theme.check_true_icon;
+            _check_color4 = my_theme.Theme.check_true_color;
+            _check4 = true;
+          }
+
+          if(_check1 == true &&_check2 == true &&_check3 == true &&_check4 == true){
+             _check_All = true;
+          }
+          else{
+             _check_All = false;
+          }
+          print(_check1);
+          print(_check2);
+          print(_check3);
+          print(_check4);
+          print(_check_All);
+
+
 
           // if (!EmailSubmitRegexValidator().isValid(password)) {
           //   print('123123123132');
           // }
-          print('$password');
+
           setState(() {});
         },
         obscureText: true,
@@ -304,6 +373,7 @@ class _Signup_page extends State<Signup_page> {
       ),
       height: 60.0,
       child: TextField(
+        controller: confirm_passwordController,
         obscureText: true,
         style: TextStyle(
           color: Colors.black,
@@ -344,11 +414,13 @@ class _Signup_page extends State<Signup_page> {
       ),
     );
   }
-
+ // String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   // final Future<FirebaseApp> firebase = Firebase.initializeApp();
   Future<Null> creatAccount() async {
     await Firebase.initializeApp().then((value) async {
-      if (_check1 == true) {
+      print(nameController.text);
+
+      if (_check_All == true &&confirm_passwordController.text == passwordController.text && nameController.text != '' ) {
         try {
           await FirebaseAuth.instance
               .createUserWithEmailAndPassword(
@@ -374,8 +446,50 @@ class _Signup_page extends State<Signup_page> {
         } on FirebaseAuthException catch (e) {
 
           print('Error: ${e.message}');
+          alert (e.message.toString());
         }
       }
+
+      else if(nameController.text == ''){
+        alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'กรุณาใส่ชื่อ');
+      }
+
+      else if(_check_All == false){
+        alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'Passwordไม่ตรงตามเงื่อนไข');
+      }
+      else if(passwordController.text != confirm_passwordController.text){
+        alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'Passwordไม่ตรงกัน');
+      }
     });
+  }
+
+
+
+
+  alert (String message){
+    AlertDialog(title: Text("omk"), content: Text("jh"));
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+            title:  Text('Error'),
+            content:  Text(message),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('OK'),
+              )]));
+  }
+  alert_Validation (String title,String message){
+    AlertDialog(title: Text("omk"), content: Text("jh"));
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+            title:  Text(title),
+            content:  Text(message),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Cancel'),
+                child: const Text('OK'),
+              )]));
   }
 }

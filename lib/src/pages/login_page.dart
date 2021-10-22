@@ -137,6 +137,8 @@ class _LoginPageState extends State<LoginPage> {
             });
           }on FirebaseAuthException catch(e){
             print(e.message);
+            alert(e.message.toString());
+
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -255,4 +257,18 @@ await Firebase.initializeApp().then((value)  async{
 
 
 }
+
+   alert (String m){
+     AlertDialog(title: Text("omk"), content: Text("jh"));
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+            title:  Text('Error'),
+            content:  Text(m),
+            actions: <Widget>[
+            TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+     child: const Text('OK'),
+     )]));
+   }
 }
