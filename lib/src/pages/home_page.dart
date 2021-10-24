@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_test/src/config/config.dart' as my_theme;
+import 'package:pokemon_test/src/pages/widget_grid.dart';
 import 'package:pokemon_test/src/service/pokemon_custom_json.dart';
 import 'package:pokemon_test/src/service/pokemon_json.dart';
 import 'package:pokemon_test/src/service/pokemon_details_json.dart';
@@ -23,50 +24,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ScrollController scrollController = ScrollController();
   String _name = '';
   String _email = '';
   List results_name = [];
   List results_url = [];
 
+  var _URL_Next = 'https://pokeapi.co/api/v2/pokemon/?offset=10&limit=10';
+
   customJSON? _customList;
   pokemonData? _pokemonDataApi;
   pokomonDetails? _pokemonDataDetails;
 
+
+
   @override
   void initState() {
+    print('sd');
     user_get();
+
+    //_scrollController.addListener(scrollListener);
     //getPokemon();
   }
 
-  Future<pokomonDetails?> NavigatorPokemonDetails(String u) async {
-    var response = await http.get(Uri.parse(u));
-    _pokemonDataDetails = pokomonDetailsFromJson(response.body);
-    // print('xxxxxsx$_pokemonDataDetails');
-    print(response.body);
+  @override
+  void dispose() {
+    scrollController.dispose();
 
-    //_pokeResult = pokemonData.fromJson(_pokemonDataDetails);
-//Sprites
-    var sprites_image_Draf = _pokemonDataDetails!.sprites.frontDefault;
-    var sprites_name_Draf = _pokemonDataDetails!.name;
-    var sprites_weight_Draf = _pokemonDataDetails!.weight;
-    var sprites_height_Draf = _pokemonDataDetails!.height;
-    var sprites_id_Draf = _pokemonDataDetails!.id;
-    var sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
-    var sprites_abilities_Draf =
-        _pokemonDataDetails!.abilities.map((e) => e.ability.name);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Details(
-                  name: sprites_name_Draf,
-                  image: sprites_image_Draf,
-                  id: sprites_id_Draf.toString(),
-                  height: sprites_height_Draf.toString(),
-                  weight: sprites_weight_Draf.toString(),
-                  baseExperience: sprites_baseExperience_Draf.toString(),
-                  abilities: sprites_abilities_Draf.toString(),
-                )));
+    super.dispose();
   }
+
+  void scrollListener(){
+    // if(_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange){
+    //  // getPokemonNext(_URL_Next);
+    // }
+  }
+
+
 
   Future<pokomonDetails?> getPokamonDetails(String u) async {
     var response = await http.get(Uri.parse(u));
@@ -83,34 +77,16 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  custom_json(List name, List url) {
-    print(name[0]);
-    print(url[0]);
-    var xsd = [
-      {'name': name[0], 'url': url[0]},
-      {'name': name[1], 'url': url[1]},
-      {'name': name[2], 'url': url[2]}
-    ];
-
-    print(xsd.map((e) => null));
-    var jsonText = jsonEncode(xsd);
-    print(jsonText.runtimeType);
-    print(jsonText);
-//_customList = {"name":name[0],"url":url[0],"image":"asdasd"};
-    // for(int i = 1 ; i <= name.length;i++){
-    //   print(name[0]);
-    // }
-  }
   List<Map> Menu = [];
-  List<Map> hh = [{"name":"k","url":"hj","image":"gh"},{"name":"k","url":"hj","image":"gh"}];
   Future<pokemonData?> getPokemon() async {
     var response = await http
         .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10'));
-    print(response.body);
+    //print(response.body);
     _pokemonDataApi = pokemonFromJson(response.body);
     var results_name_Draf = _pokemonDataApi!.results.map((e) => e.name);
     var results_url_Draf = _pokemonDataApi!.results.map((e) => e.url);
-    List <Result> cc = _pokemonDataApi!.results;
+    var results_Draf = _pokemonDataApi!.results.map((e) => e).toList();
+
     results_name = results_name_Draf.toList();
     results_url = results_url_Draf.toList();
     Menu = [];
@@ -120,15 +96,50 @@ class _HomePageState extends State<HomePage> {
       Map x = {'name':results_name[i],'url':results_url[i]};
       Menu.add(x);
 
+
     }
    // Map x = {'name':'qq','url':'qwe'};
 
 
-    print('===========> ${Menu.length}');
+    print('===========> ${Menu}');
     //custom_json(results_name,results_url);
 
     //print(_pokemonDataDetails!.sprites.frontDefault);
   }
+  // Future<pokemonData?> getPokemonNext(String _URL_Next) async {
+  //
+  //   var response = await http
+  //       .get(Uri.parse(_URL_Next));
+  //   //print('=====??>${response.body}');
+  //
+  //   _pokemonDataApi = pokemonFromJson(response.body);
+  //   var results_name_Draf = _pokemonDataApi!.results.map((e) => e.name);
+  //   var results_url_Draf = _pokemonDataApi!.results.map((e) => e.url);
+  //   var results_Draf = _pokemonDataApi!.results.map((e) => e).toList();
+  //
+  //   results_name = results_name_Draf.toList();
+  //   results_url = results_url_Draf.toList();
+  //   List<Map> Menu_Draf = [];
+  //   for(int i = 0 ; i <= 9; i++){
+  //     // var response1 = await http.get(Uri.parse(results_url[i]));
+  //     // _pokemonDataDetails = pokomonDetailsFromJson(response1.body);
+  //     Map x = {'name':results_name[i],'url':results_url[i]};
+  //     Menu_Draf.add(x);
+  //
+  //   }
+  //   Menu.addAll(Menu_Draf);
+  //
+  //    print(_pokemonDataApi!.next);
+  //    print('${Menu.length}');
+  //   print('${Menu[Menu.length-1]['name']}');
+  //   // Map x = {'name':'qq','url':'qwe'};
+  //
+  //
+  //   _URL_Next =_pokemonDataApi!.next;
+  //   //custom_json(results_name,results_url);
+  //
+  //   //print(_pokemonDataDetails!.sprites.frontDefault);
+  // }
 
   Future<Null> user_get() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -213,80 +224,125 @@ class _HomePageState extends State<HomePage> {
                 builder: (BuildContext context,
                     AsyncSnapshot<pokemonData?> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return view1();
+                    print('===========..${snapshot.data}');
+                    return GridWidget(pokemonDataApi: snapshot.data,Menu: Menu);
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }
                 }),
+
           ],
         ));
   }
 
-  view() {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: _pokemonDataApi!.results.map((poke_results) {
-        return Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: InkWell(
-            onTap: () {
-              NavigatorPokemonDetails(poke_results.url);
-            },
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 140.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png')),
-                    ),
-                  ),
-                  Text(
-                    poke_results.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
-  view1() {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: List.generate(Menu.length, (index) {
-        return Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: InkWell(
-            onTap: () {
-              NavigatorPokemonDetails(Menu[index]['url']);
-            },
-            child: Card(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 140.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png')),
-                    ),
-                  ),
-                  Text(
-                    Menu[index]['name'],
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      }),
-    );
-  }
+  // view() {
+  //   return GridView.count(
+  //     crossAxisCount: 2,
+  //     children: _pokemonDataApi!.results.map((poke_results) {
+  //
+  //
+  //       return Padding(
+  //         padding: const EdgeInsets.all(2.0),
+  //         child: InkWell(
+  //           onTap: () {
+  //            // NavigatorPokemonDetails(poke_results.url);
+  //           },
+  //           child: Card(
+  //             child: Column(
+  //               children: <Widget>[
+  //                 Container(
+  //                   height: 140.0,
+  //                   width: 100.0,
+  //                   decoration: BoxDecoration(
+  //                     image: DecorationImage(
+  //                         image: NetworkImage(
+  //                             'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png')),
+  //                   ),
+  //                 ),
+  //                 Text(
+  //                   poke_results.name,
+  //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     }).toList(),
+  //   );
+  // }
+  // view1() {
+  //   return GridView.count(
+  //     controller: scrollController,
+  //     crossAxisCount: 2,
+  //     children: List.generate(Menu.length, (index) {
+  //       return Padding(
+  //         padding: const EdgeInsets.all(2.0),
+  //         child: InkWell(
+  //           onTap: () {
+  //             //NavigatorPokemonDetails(Menu[index]['url']);
+  //           },
+  //           child: Card(
+  //             child: Column(
+  //               children: <Widget>[
+  //                 Container(
+  //                   height: 140.0,
+  //                   width: 100.0,
+  //                   decoration: BoxDecoration(
+  //                     image: DecorationImage(
+  //                         image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png')),
+  //                   ),
+  //                 ),
+  //                 Text(
+  //                   Menu[index]['name'],
+  //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     }),
+  //   );
+  // }
+  //
+  // view2() {
+  //   return GridView.builder(
+  //     controller: scrollController,
+  //       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+  //     maxCrossAxisExtent: 200,
+  //       childAspectRatio: 1/1,
+  //       crossAxisSpacing: 5,
+  //       mainAxisSpacing: 5,),
+  //     itemCount: Menu.length,
+  //     itemBuilder: (BuildContext Context , index) {
+  //       return Padding(
+  //         padding: const EdgeInsets.all(2.0),
+  //         child: InkWell(
+  //           onTap: () {
+  //          //   NavigatorPokemonDetails(Menu[index]['url']);
+  //           },
+  //           child: Card(
+  //             child: Column(
+  //               children: <Widget>[
+  //                 Container(
+  //                   height: 140.0,
+  //                   width: 100.0,
+  //                   decoration: BoxDecoration(
+  //                     image: DecorationImage(
+  //                         image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png')),
+  //                   ),
+  //                 ),
+  //                 Text(
+  //                   Menu[index]['name'],
+  //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     });
+  // }
+
 }

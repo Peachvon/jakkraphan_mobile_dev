@@ -12,6 +12,7 @@ class Details extends StatelessWidget {
   late final String baseExperience;
   late final String abilities;
 
+
   Details({required this.name,
     required this.image,
     required this.id,
@@ -19,6 +20,7 @@ class Details extends StatelessWidget {
     required this.weight,
     required this.baseExperience,
     required this.abilities,
+
   });
 
 
@@ -99,7 +101,7 @@ class Details extends StatelessWidget {
                             width: MediaQuery.of(context).size.width * 0.45,
                             child: Text('weight'),
                           ),
-                          Text(': $weight cm'),
+                          Text(': $weight kg'),
                         ],
                       ),
                       Row(
@@ -109,35 +111,13 @@ class Details extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.only(bottom: 10),
                             width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Lv.'),
+                            child: Text('EXP'),
                           ),
                           Text(': $baseExperience'),
                         ],
                       ),
-                      Row(
 
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Lv.'),
-                          ),
-                          Text(': $baseExperience'),
-                        ],
-                      ),
-                      Row(
 
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            width: MediaQuery.of(context).size.width * 0.45,
-                            child: Text('Lv.'),
-                          ),
-                          Text(': $baseExperience'),
-                        ],
-                      ),
 
 
                     ],
