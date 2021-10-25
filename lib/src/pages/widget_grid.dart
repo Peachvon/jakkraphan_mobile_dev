@@ -40,19 +40,19 @@ class GridWidgetState extends State<GridWidget> {
     var sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
     var sprites_abilities_Draf =
     _pokemonDataDetails!.abilities.map((e) => e.ability.name);
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Details(
-              name: sprites_name_Draf,
-              image: sprites_image_Draf,
-              id: sprites_id_Draf.toString(),
-              height: sprites_height_Draf.toString(),
-              weight: sprites_weight_Draf.toString(),
-              baseExperience: sprites_baseExperience_Draf.toString(),
-              abilities: sprites_abilities_Draf.toString(),
-
-            )));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => Details(
+    //           name: sprites_name_Draf,
+    //           image: sprites_image_Draf,
+    //           id: sprites_id_Draf.toString(),
+    //           height: sprites_height_Draf.toString(),
+    //           weight: sprites_weight_Draf.toString(),
+    //           baseExperience: sprites_baseExperience_Draf.toString(),
+    //           abilities: sprites_abilities_Draf.toString(),
+    //
+    //         )));
   }
 
   List results_name = [];
@@ -142,7 +142,16 @@ class GridWidgetState extends State<GridWidget> {
             padding: const EdgeInsets.all(2.0),
             child: InkWell(
               onTap: () {
-                NavigatorPokemonDetails(widget.Menu![index]['url']);
+               // NavigatorPokemonDetails(widget.Menu![index]['url']);
+                String url = widget.Menu![index]['url'];
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Details(
+                          url: url,
+
+
+                        )));
               },
               child: Card(
                 child: Column(
