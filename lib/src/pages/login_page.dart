@@ -129,16 +129,17 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 5.0,
         onPressed: () async {
           try {
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: emailController.text, password: passwordController.text)
+            await FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+                    email: emailController.text,
+                    password: passwordController.text)
                 .then((value) {
               Navigator.pushNamedAndRemoveUntil(
                   context, '/HomePage', (route) => false);
             });
-          }on FirebaseAuthException catch(e){
+          } on FirebaseAuthException catch (e) {
             print(e.message);
             alert(e.message.toString());
-
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -233,42 +234,51 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+  // Future loginWithGoogle(BuildContext context) async {
+  //   GoogleSignIn _googleSignIn = GoogleSignIn(
+  //     scopes: [
+  //       'https://www.googleapis.com/auth/contacts.readonly',
+  //     ],
+  //   );
+  //   GoogleSignInAccount? user = await _googleSignIn.signIn();
+  //   GoogleSignInAuthentication userAuth = await user!.authentication;
+  //
+  //   await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
+  //       idToken: userAuth.idToken, accessToken: userAuth.accessToken));
+  //   checkAuth(context); // after success route to home.
+  // }
 
-  Future<Null> login_google()async{
+  Future<Null> login_google() async {
     GoogleSignIn _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
         'https://www.googleapis.com/auth/contacts.readonly',
       ],
     );
-await Firebase.initializeApp().then((value)  async{
-  await _googleSignIn.signIn().then((value){
-
-    String? name = value!.displayName;
-    String email = value.email;
-    print('Google login => name: $name , email: $email');
-    // Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
-    //   print('Yes!');
-
-
+    await Firebase.initializeApp().then((value) async {
+      print('=================>>> ${value.name}  <<===========');
+      await _googleSignIn.signIn().then((value) {
+        String? name = value!.displayName;
+        String email = value.email;
+        print('Google login => name: $name , email: $email');
+        // Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+        //   print('Yes!');
+      });
     });
+  }
 
-});
-
-
-}
-
-   alert (String m){
-     AlertDialog(title: Text("omk"), content: Text("jh"));
+  alert(String m) {
+    AlertDialog(title: Text("omk"), content: Text("jh"));
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-            title:  Text('Error'),
-            content:  Text(m),
-            actions: <Widget>[
-            TextButton(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
-     child: const Text('OK'),
-     )]));
-   }
+                title: Text('Error'),
+                content: Text(m),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('OK'),
+                  )
+                ]));
+  }
 }
