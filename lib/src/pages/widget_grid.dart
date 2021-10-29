@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, unnecessary_new, avoid_print, unnecessary_brace_in_string_interps, prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:pokemon_test/src/service/pokemon_details_json.dart';
 import 'package:pokemon_test/src/service/pokemon_json.dart';
@@ -9,19 +11,20 @@ class GridWidget extends StatefulWidget {
   final pokemonData? pokemonDataApi;
   final List<Map>? Menu;
 
-  GridWidget({Key? key, this.pokemonDataApi, this.Menu,}) : super(key: key);
+  GridWidget({
+    Key? key,
+    this.pokemonDataApi,
+    this.Menu,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => GridWidgetState();
 }
 
 class GridWidgetState extends State<GridWidget> {
-
-
   final ScrollController scrollController = new ScrollController();
   pokomonDetails? _pokemonDataDetails;
   pokemonData? _pokemonDataApi;
-
 
   Future<pokomonDetails?> NavigatorPokemonDetails(String u) async {
     var response = await http.get(Uri.parse(u));
@@ -39,7 +42,7 @@ class GridWidgetState extends State<GridWidget> {
     var sprites_id_Draf = _pokemonDataDetails!.id;
     var sprites_baseExperience_Draf = _pokemonDataDetails!.baseExperience;
     var sprites_abilities_Draf =
-    _pokemonDataDetails!.abilities.map((e) => e.ability.name);
+        _pokemonDataDetails!.abilities.map((e) => e.ability.name);
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(
@@ -60,8 +63,7 @@ class GridWidgetState extends State<GridWidget> {
   String _next_url = 'https://pokeapi.co/api/v2/pokemon/?offset=10&limit=10';
   Future<pokemonData?> getPokemonNext() async {
     print('========>${_next_url}');
-    var response = await http
-        .get(Uri.parse(_next_url));
+    var response = await http.get(Uri.parse(_next_url));
     //print(response.body);
     _pokemonDataApi = pokemonFromJson(response.body);
     var results_name_Draf = _pokemonDataApi!.results.map((e) => e.name);
@@ -71,18 +73,16 @@ class GridWidgetState extends State<GridWidget> {
     results_name = results_name_Draf.toList();
     results_url = results_url_Draf.toList();
 
-    for(int i = 0 ; i <= 9; i++){
+    for (int i = 0; i <= 9; i++) {
       // var response1 = await http.get(Uri.parse(results_url[i]));
       // _pokemonDataDetails = pokomonDetailsFromJson(response1.body);
-      Map x = {'name':results_name[i],'url':results_url[i]};
+      Map x = {'name': results_name[i], 'url': results_url[i]};
       setState(() {
-
-     widget.Menu!.add(x);
+        widget.Menu!.add(x);
       });
-
-
     }
-    _next_url = 'https://pokeapi.co/api/v2/pokemon/?offset=${widget.Menu!.length}&limit=10';
+    _next_url =
+        'https://pokeapi.co/api/v2/pokemon/?offset=${widget.Menu!.length}&limit=10';
     // Map x = {'name':'qq','url':'qwe'};
     print('========<<<<${_next_url}');
 
@@ -91,18 +91,17 @@ class GridWidgetState extends State<GridWidget> {
 
     //print(_pokemonDataDetails!.sprites.frontDefault);
   }
+
   bool onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      if (scrollController.offset >= scrollController.position.maxScrollExtent && !scrollController.position.outOfRange) {
-
-          getPokemonNext();
-
-
+      if (scrollController.offset >=
+              scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange) {
+        getPokemonNext();
       }
     }
     return true;
   }
-
 
   @override
   void initState() {
@@ -121,19 +120,18 @@ class GridWidgetState extends State<GridWidget> {
   //    // getPokemonNext(_URL_Next);
   //   }
 
-
   @override
   Widget build(BuildContext context) {
     return NotificationListener(
       onNotification: onNotification,
       child: new GridView.builder(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 5.0,
-        ),   // EdgeInsets.only
+        ), // EdgeInsets.only
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 0.85,
-        ),  // SliverGridDelegateWithFixedCrossAxisCount
+        ), // SliverGridDelegateWithFixedCrossAxisCount
         controller: scrollController,
         itemCount: widget.Menu!.length,
         physics: const AlwaysScrollableScrollPhysics(),
@@ -142,16 +140,14 @@ class GridWidgetState extends State<GridWidget> {
             padding: const EdgeInsets.all(2.0),
             child: InkWell(
               onTap: () {
-               // NavigatorPokemonDetails(widget.Menu![index]['url']);
+                // NavigatorPokemonDetails(widget.Menu![index]['url']);
                 String url = widget.Menu![index]['url'];
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Details(
-                          url: url,
-
-
-                        )));
+                              url: url,
+                            )));
               },
               child: Card(
                 child: Column(
@@ -161,22 +157,22 @@ class GridWidgetState extends State<GridWidget> {
                       width: 100.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png')),
+                            image: NetworkImage(
+                                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png')),
                       ),
                     ),
                     Text(
                       widget.Menu![index]['name'],
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
               ),
             ),
-          );;
+          );
         },
-      ),  // GridView.builder
-    );  // NotificationListener
+      ), // GridView.builder
+    ); // NotificationListener
   }
-
-
 }

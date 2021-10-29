@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, unused_field, prefer_const_constructors, camel_case_types, use_key_in_widget_constructors, avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pokemon_test/src/config/config.dart' as my_theme;
 import 'package:pokemon_test/src/service/user_model.dart';
-import 'package:pokemon_test/router.dart';
 
 class Signup_page extends StatefulWidget {
   @override
@@ -101,10 +102,7 @@ class _Signup_page extends State<Signup_page> {
     return Container(
       padding: EdgeInsets.all(16.0),
       color: Colors.white70,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -144,7 +142,7 @@ class _Signup_page extends State<Signup_page> {
               Icon(
                 _check_icon2,
                 size: 18,
-                  color: _check_color2,
+                color: _check_color2,
               ),
               SizedBox(
                 width: 8.0,
@@ -206,10 +204,7 @@ class _Signup_page extends State<Signup_page> {
 
   signup_name() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Color(0xFFFFFFFF),
@@ -234,10 +229,7 @@ class _Signup_page extends State<Signup_page> {
 
   signup_email() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Color(0xFFFFFFFF),
@@ -260,14 +252,9 @@ class _Signup_page extends State<Signup_page> {
     );
   }
 
-
-
   signup_password() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Color(0xFFFFFFFF),
@@ -278,67 +265,67 @@ class _Signup_page extends State<Signup_page> {
         controller: passwordController,
         onChanged: (passwordController) {
           String password = passwordController;
-          String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+          String pattern =
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
 
-          String  pattern2= r'^(?=.*?[A-Z]).';
-          String  pattern3 = r'^(?=.*?[a-z]).';
-          String  pattern4 = r'^(?=.*?[0-9]).';
+          String pattern2 = r'^(?=.*?[A-Z]).';
+          String pattern3 = r'^(?=.*?[a-z]).';
+          String pattern4 = r'^(?=.*?[0-9]).';
           RegExp regExp2 = new RegExp(pattern2);
           RegExp regExp3 = new RegExp(pattern3);
           RegExp regExp4 = new RegExp(pattern4);
-
 
           if (password.length < 8) {
             _check_icon1 = my_theme.Theme.check_false_icon;
             _check_color1 = my_theme.Theme.check_false_color;
             _check1 = false;
           } else {
-            _check_icon1= my_theme.Theme.check_true_icon;
+            _check_icon1 = my_theme.Theme.check_true_icon;
             _check_color1 = my_theme.Theme.check_true_color;
             _check1 = true;
           }
 
-          if(regExp2.hasMatch(password) == false){
-            _check_icon2= my_theme.Theme.check_false_icon;
+          if (regExp2.hasMatch(password) == false) {
+            _check_icon2 = my_theme.Theme.check_false_icon;
             _check_color2 = my_theme.Theme.check_false_color;
             _check2 = false;
-          }else {
+          } else {
             _check_icon2 = my_theme.Theme.check_true_icon;
             _check_color2 = my_theme.Theme.check_true_color;
             _check2 = true;
           }
-          if(regExp3.hasMatch(password) == false){
-            _check_icon3= my_theme.Theme.check_false_icon;
+          if (regExp3.hasMatch(password) == false) {
+            _check_icon3 = my_theme.Theme.check_false_icon;
             _check_color3 = my_theme.Theme.check_false_color;
             _check3 = false;
-          }else {
+          } else {
             _check_icon3 = my_theme.Theme.check_true_icon;
             _check_color3 = my_theme.Theme.check_true_color;
             _check3 = true;
           }
-          if(regExp4.hasMatch(password) == false){
-            _check_icon4= my_theme.Theme.check_false_icon;
+          if (regExp4.hasMatch(password) == false) {
+            _check_icon4 = my_theme.Theme.check_false_icon;
             _check_color4 = my_theme.Theme.check_false_color;
             _check4 = false;
-          }else {
+          } else {
             _check_icon4 = my_theme.Theme.check_true_icon;
             _check_color4 = my_theme.Theme.check_true_color;
             _check4 = true;
           }
 
-          if(_check1 == true &&_check2 == true &&_check3 == true &&_check4 == true){
-             _check_All = true;
-          }
-          else{
-             _check_All = false;
+          if (_check1 == true &&
+              _check2 == true &&
+              _check3 == true &&
+              _check4 == true) {
+            _check_All = true;
+          } else {
+            _check_All = false;
           }
           print(_check1);
           print(_check2);
           print(_check3);
           print(_check4);
           print(_check_All);
-
-
 
           // if (!EmailSubmitRegexValidator().isValid(password)) {
           //   print('123123123132');
@@ -361,10 +348,7 @@ class _Signup_page extends State<Signup_page> {
 
   signup_confirm() {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Color(0xFFFFFFFF),
@@ -389,10 +373,7 @@ class _Signup_page extends State<Signup_page> {
   button_signup() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15.0),
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 0.85,
+      width: MediaQuery.of(context).size.width * 0.85,
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () => {creatAccount()},
@@ -413,13 +394,16 @@ class _Signup_page extends State<Signup_page> {
       ),
     );
   }
- // String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+
+  // String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   // final Future<FirebaseApp> firebase = Firebase.initializeApp();
-  Future<Null> creatAccount() async {
+  Future<void> creatAccount() async {
     await Firebase.initializeApp().then((value) async {
       print(nameController.text);
 
-      if (_check_All == true &&confirm_passwordController.text == passwordController.text && nameController.text != '' ) {
+      if (_check_All == true &&
+          confirm_passwordController.text == passwordController.text &&
+          nameController.text != '') {
         try {
           await FirebaseAuth.instance
               .createUserWithEmailAndPassword(
@@ -432,63 +416,63 @@ class _Signup_page extends State<Signup_page> {
                 .then((value2) async {
               String uid = value.user!.uid;
               print('update $uid');
-              UserModel model = UserModel(email: emailController.text, name: nameController.text);
+              UserModel model = UserModel(
+                  email: emailController.text, name: nameController.text);
               Map<String, dynamic> data = model.toMap();
 
-              await FirebaseFirestore.instance.collection('user').doc(uid).set(data).then((value) {
-
-                Navigator.pushNamedAndRemoveUntil(context, '/HomePage', (route) => false);
+              await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(uid)
+                  .set(data)
+                  .then((value) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/HomePage', (route) => false);
                 print('firestro');
               });
-                });
+            });
           });
         } on FirebaseAuthException catch (e) {
-
           print('Error: ${e.message}');
-          alert (e.message.toString());
+          alert(e.message.toString());
         }
-      }
-
-      else if(nameController.text == ''){
+      } else if (nameController.text == '') {
         alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'กรุณาใส่ชื่อ');
-      }
-
-      else if(_check_All == false){
-        alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'Passwordไม่ตรงตามเงื่อนไข');
-      }
-      else if(passwordController.text != confirm_passwordController.text){
+      } else if (_check_All == false) {
+        alert_Validation(
+            'ไม่สามารถสมัครสมาชิกได้', 'Passwordไม่ตรงตามเงื่อนไข');
+      } else if (passwordController.text != confirm_passwordController.text) {
         alert_Validation('ไม่สามารถสมัครสมาชิกได้', 'Passwordไม่ตรงกัน');
       }
     });
   }
 
-
-
-
-  alert (String message){
+  alert(String message) {
     AlertDialog(title: Text("omk"), content: Text("jh"));
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-            title:  Text('Error'),
-            content:  Text(message),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('OK'),
-              )]));
+                title: Text('Error'),
+                content: Text(message),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('OK'),
+                  )
+                ]));
   }
-  alert_Validation (String title,String message){
+
+  alert_Validation(String title, String message) {
     AlertDialog(title: Text("omk"), content: Text("jh"));
     showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-            title:  Text(title),
-            content:  Text(message),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'Cancel'),
-                child: const Text('OK'),
-              )]));
+                title: Text(title),
+                content: Text(message),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('OK'),
+                  )
+                ]));
   }
 }
